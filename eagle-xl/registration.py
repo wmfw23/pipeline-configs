@@ -19,6 +19,7 @@ This file calculates:
         Metallicity in solar units (relative to metal_mass_fraction).
     + stellar_mass_to_halo_mass_{x}_kpc for 30 and 100 kpc
         Stellar Mass / Halo Mass (mass_200crit) for 30 and 100 kpc apertures.
+    + baryon fraction in M_(200,cr),
 """
 
 aperture_sizes = [30, 100]
@@ -131,3 +132,21 @@ name = "$M_{\\rm HI}$"
 HI_mass.name = name
 
 setattr(self, "gas_HI_mass_Msun" , HI_mass)
+
+# Now baryon fractions
+
+M_200 = catalogue.masses.mass_200crit
+M_200_gas = catalogue.masses.mass_200crit_gas
+M_200_star = catalogue.masses.mass_200crit_star
+M_200_baryon = M_200_gas + M_200_star
+
+f_b = M_200_baryon / M_200
+name = "$f_{\\rm b, true}$"
+f_b.name = name
+
+f_gas = M_200_gas / M_200
+name = "$f_{\\rm gas, true}$"
+f_gas.name = name
+
+setattr(self, "baryon_fraction_true" ,f_b)
+setattr(self, "gas_fraction_true" ,f_gas)
