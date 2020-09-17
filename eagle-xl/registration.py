@@ -19,7 +19,8 @@ This file calculates:
         Metallicity in solar units (relative to metal_mass_fraction).
     + stellar_mass_to_halo_mass_{x}_kpc for 30 and 100 kpc
         Stellar Mass / Halo Mass (mass_200crit) for 30 and 100 kpc apertures.
-    + baryon fraction in M_(200,cr),
+    + HI masses of all subhaloes.
+    + baryon fraction in M_(200,cr) and M_(500,cr).
 """
 
 aperture_sizes = [30, 100]
@@ -121,7 +122,7 @@ for aperture_size in aperture_sizes:
 
     setattr(self, f"stellar_mass_to_halo_mass_{aperture_size}_kpc", smhm)
 
-# Now HI mass functions
+# Now HI masses
 
 gas_mass = catalogue.masses.m_gas
 H_frac = getattr(catalogue.element_mass_fractions, "element_0")
@@ -131,7 +132,7 @@ HI_mass = gas_mass * H_frac * HI_frac
 name = "$M_{\\rm HI}$"
 HI_mass.name = name
 
-setattr(self, "gas_HI_mass_Msun" , HI_mass)
+setattr(self, "gas_HI_mass_Msun", HI_mass)
 
 # Now baryon fractions
 
@@ -148,8 +149,8 @@ f_gas_200 = M_200_gas / M_200
 name = "$f_{\\rm gas, 200, true}$"
 f_gas_200.name = name
 
-setattr(self, "baryon_fraction_true_R200" ,f_b_200)
-setattr(self, "gas_fraction_true_R200" ,f_gas_200)
+setattr(self, "baryon_fraction_true_R200", f_b_200)
+setattr(self, "gas_fraction_true_R200", f_gas_200)
 
 M_500 = catalogue.masses.mass_500crit
 M_500_gas = catalogue.masses.mass_500crit_gas
@@ -164,5 +165,5 @@ f_gas_500 = M_500_gas / M_500
 name = "$f_{\\rm gas, 500, true}$"
 f_gas_500.name = name
 
-setattr(self, "baryon_fraction_true_R500" ,f_b_500)
-setattr(self, "gas_fraction_true_R500" ,f_gas_500)
+setattr(self, "baryon_fraction_true_R500", f_b_500)
+setattr(self, "gas_fraction_true_R500", f_gas_500)
