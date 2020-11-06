@@ -198,7 +198,7 @@ self.hi_to_stellar_mass_100_kpc = (
     self.neutral_hydrogen_mass_100_kpc / catalogue.apertures.mass_star_100_kpc
 )
 
-self.molecular_hydrogen_mass_100_kpc = 2 * gas_mass * H_frac * species_7
+self.molecular_hydrogen_mass_100_kpc = gas_mass * H_frac * species_7
 self.h2_to_stellar_mass_100_kpc = (
     self.molecular_hydrogen_mass_100_kpc / catalogue.apertures.mass_star_100_kpc
 )
